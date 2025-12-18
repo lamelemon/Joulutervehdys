@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joulutervehdys</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(#00111f, #003366);
+      overflow: hidden;
+      color: white;
+    }
+
+    .greeting {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      font-size: 3rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+      z-index: 2;
+    }
+
+    /* Santa + reindeer */
+    .santa {
+      position: absolute;
+      top: 20%;
+      left: -300px;
+      display: flex;
+      align-items: center;
+      animation: fly 15s linear infinite;
+      z-index: 1;
+    }
+
+    .reindeer {
+      font-size: 3rem;
+      margin-right: 10px;
+    }
+
+    .sleigh {
+      font-size: 3.5rem;
+    }
+
+    @keyframes fly {
+      0% {
+        transform: translateX(0) translateY(0);
+      }
+      50% {
+        transform: translateX(120vw) translateY(-50px);
+      }
+      100% {
+        transform: translateX(250vw) translateY(0);
+      }
+    }
+
+    /* Snow */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1rem;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="greeting">🎄 Hyvää Joulua ja Onnellista Uutta Vuotta! 🎄</div>
+
+  <div class="santa">
+    <div class="reindeer">🦌🦌🦌</div>
+    <div class="sleigh">🛷🎅</div>
+  </div>
+
+  <script>
+    // Create snowflakes
+    for (let i = 0; i < 50; i++) {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      snowflake.style.opacity = Math.random();
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      document.body.appendChild(snowflake);
+    }
+  </script>
+
+</body>
+</html>
