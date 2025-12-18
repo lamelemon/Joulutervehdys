@@ -3,62 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joulutervehdys</title>
+  <title>Taianomainen Joulutervehdys</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Trebuchet MS', sans-serif;
     }
 
     body {
       height: 100vh;
-      background: linear-gradient(#00111f, #003366);
+      background: radial-gradient(circle at bottom, #0a2a43, #020b16 70%);
       overflow: hidden;
       color: white;
     }
 
-    .greeting {
+    /* Stars */
+    .star {
       position: absolute;
-      top: 40%;
-      width: 100%;
-      text-align: center;
-      font-size: 3rem;
-      text-shadow: 0 0 10px rgba(255,255,255,0.6);
-      z-index: 2;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite ease-in-out;
     }
 
-    /* Santa + reindeer */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Greeting card */
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px 60px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+      z-index: 2;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .card h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-15px); }
+    }
+
+    /* Santa animation */
     .santa {
       position: absolute;
-      top: 20%;
-      left: -300px;
-      display: flex;
-      align-items: center;
-      animation: fly 15s linear infinite;
+      top: 25%;
+      left: -400px;
+      font-size: 3.5rem;
+      white-space: nowrap;
+      animation: fly 18s linear infinite;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
       z-index: 1;
     }
 
-    .reindeer {
-      font-size: 3rem;
-      margin-right: 10px;
-    }
-
-    .sleigh {
-      font-size: 3.5rem;
-    }
-
     @keyframes fly {
-      0% {
-        transform: translateX(0) translateY(0);
-      }
-      50% {
-        transform: translateX(120vw) translateY(-50px);
-      }
-      100% {
-        transform: translateX(250vw) translateY(0);
-      }
+      0% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(120vw) translateY(-80px); }
+      100% { transform: translateX(260vw) translateY(20px); }
     }
 
     /* Snow */
@@ -66,36 +87,48 @@
       position: absolute;
       top: -10px;
       color: white;
-      font-size: 1rem;
       animation: fall linear infinite;
+      pointer-events: none;
     }
 
     @keyframes fall {
-      to {
-        transform: translateY(110vh);
-      }
+      to { transform: translateY(110vh); }
     }
   </style>
 </head>
 <body>
 
-  <div class="greeting">🎄 Hyvää Joulua ja Onnellista Uutta Vuotta! 🎄</div>
-
-  <div class="santa">
-    <div class="reindeer">🦌🦌🦌</div>
-    <div class="sleigh">🛷🎅</div>
+  <div class="card">
+    <h1>✨ Hyvää Joulua ✨</h1>
+    <p>Rauhaa, iloa ja taikaa joulun aikaan</p>
   </div>
 
+  <div class="santa">🦌🦌🦌🛷🎅</div>
+
   <script>
-    // Create snowflakes
-    for (let i = 0; i < 50; i++) {
+    // Stars
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      document.body.appendChild(star);
+    }
+
+    // Snowflakes
+    for (let i = 0; i < 60; i++) {
       const snowflake = document.createElement('div');
       snowflake.className = 'snowflake';
       snowflake.textContent = '❄';
       snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      snowflake.style.fontSize = Math.random() * 12 + 10 + 'px';
       snowflake.style.opacity = Math.random();
-      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.animationDuration = Math.random() * 5 + 6 + 's';
+      snowflake.style.animationDelay = Math.random() * 5 + 's';
       document.body.appendChild(snowflake);
     }
   </script>
